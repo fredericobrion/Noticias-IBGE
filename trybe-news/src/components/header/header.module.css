@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Poller+One&display=swap');
+
+.header {
+  background-color: rgba(14, 14, 14, 0.85);
+  display: flex;
+  height: 13rem;
+  width: 100%;
+}
+
+header div {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.header h1 {
+  color: white;
+  font-family: 'Poller One', cursive;
+  font-size: 5.4rem;
+}
