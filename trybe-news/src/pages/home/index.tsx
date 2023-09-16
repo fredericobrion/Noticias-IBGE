@@ -2,6 +2,7 @@ import MostRecent from "../../components/most-recent";
 import { useContext, useEffect } from 'react'
 import { getNews } from "../../services/apiFetchs";
 import NewsContext from "../../context/NewsContext";
+import NewsCard from "../../components/news-card";
 
 function Home() {
   const { news, updateNews, updateCompleted } = useContext(NewsContext);
@@ -15,11 +16,11 @@ function Home() {
     apiResult();
   }, []);
 
-  console.log(news[0])
 
   return (
     <div>
       <MostRecent />
+      {news.map((_, index) => <NewsCard key={ index } index={index} />)}
     </div>
   );
 }
