@@ -7,17 +7,22 @@ import styles from './most-recent.module.css';
 
 import emptyHeart from '../../assets/images/empty-heart.svg';
 import filledHeart from '../../assets/images/filled-heart.svg';
+import { favoriteNews } from "../../services/favoriteNews";
 
 const BASE_URL = 'https://agenciadenoticias.ibge.gov.br/';
 
 function MostRecent() {
-  const { news, fetchCompleted } = useContext(NewsContext);
+  const { news, fetchCompleted, favoriteNewsList, updateFavoriteNews } = useContext(NewsContext);
 
   const mostRecentNew = fetchCompleted ? news[0] : {} as News;
 
   const images = fetchCompleted ? JSON.parse(news[0].imagens) : {} as Images;
 
   const postedDate = fetchCompleted ? news[0].data_publicacao : '';
+
+  const localStorageFavorites = JSON.parse(localStorage.getItem('favorites')) as News[] || [] as News[];
+
+  const isFavorite = localStorageFavorites.some((favorite) => favorite.id === mostRecentNew.id);
 
   return (
     <div className={ styles.container }>
@@ -28,8 +33,10 @@ function MostRecent() {
       />
       <div>
         <h6>Notícia mais recente</h6>
-        <button>
-          <img src={ filledHeart } alt="" />
+        <button
+          onClick={ () => favoriteNews(mostRecentNew.id, favoriteNewsList, updateFavoriteNews, mostRecentNew)}
+        >
+          <img src={ isFavorite ? filledHeart : emptyHeart } alt="" />
         </button>
         <h2>{ mostRecentNew.titulo }</h2>
         <p>{ mostRecentNew.introducao }</p>

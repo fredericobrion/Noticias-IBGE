@@ -9,6 +9,7 @@ type NewsProviderProps = {
 function NewsProvider({ children }: NewsProviderProps) {
   const [news, setNews] = useState<News[]>([]);
   const [fetchCompleted, setFetchCompleted] = useState(false);
+  const [favoriteNewsList, setFavoriteNewsList] = useState<News[]>([]);
 
   const updateNews = (news: News[]) => {
     setNews(news);
@@ -18,11 +19,17 @@ function NewsProvider({ children }: NewsProviderProps) {
     setFetchCompleted(arg);
   }
 
+  const updateFavoriteNews = (favorite: News[]) => {
+    setFavoriteNewsList(favorite);
+  }
+
   const valueContext = {
     news,
     updateNews,
     fetchCompleted,
     updateCompleted,
+    favoriteNewsList,
+    updateFavoriteNews,
   }
 
   return (
