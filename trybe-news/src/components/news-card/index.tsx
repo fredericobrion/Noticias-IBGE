@@ -10,30 +10,28 @@ import filledHeart from '../../assets/images/filled-heart.svg';
 import { favoriteNews } from '../../services/favoriteNews';
 
 type NewsCardProsps = {
-  index: number;
+  notice: News;
 };
 
-function NewsCard({ index }: NewsCardProsps) {
-  const { news, fetchCompleted, favoriteNewsList, updateFavoriteNews } = useContext(NewsContext);
+function NewsCard({ notice }: NewsCardProsps) {
+  const { favoriteNewsList, updateFavoriteNews } = useContext(NewsContext);
 
-  const newByIndex = fetchCompleted ? news[index] : ({} as News);
-
-  const postedDate = fetchCompleted ? newByIndex.data_publicacao : '';
+  const postedDate = notice.data_publicacao;
 
   const localStorageFavorites = JSON.parse(localStorage.getItem('favorites')) as News[] || [] as News[];
 
-  const isFavorite = localStorageFavorites.some((favorite) => favorite.id === newByIndex.id);
+  const isFavorite = localStorageFavorites.some((favorite) => favorite.id === notice.id);
 
   return (
     <div className={ styles.container__card }>
-      <h4>{newByIndex.titulo}</h4>
-      <p>{newByIndex.introducao}</p>
+      <h4>{notice.titulo}</h4>
+      <p>{notice.introducao}</p>
       <div>
         <p>{daysPosted(postedDate)}</p>
         <Link to="/" className={ styles.link }>Leia a Noticia</Link>
       </div>
       <button
-        onClick={ () => favoriteNews(newByIndex.id, favoriteNewsList, updateFavoriteNews, newByIndex) }
+        onClick={ () => favoriteNews(notice.id, favoriteNewsList, updateFavoriteNews, notice) }
       >
         <img src={ isFavorite ? filledHeart : emptyHeart } alt="" />
       </button>
