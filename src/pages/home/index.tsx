@@ -59,6 +59,7 @@ function Home() {
           <input
             type="text"
             value={ filter }
+            placeholder="Filtre por título"
             onChange={ (e) => setFilter(e.target.value) }
           />
         </div>
