@@ -8,15 +8,13 @@ import listIcon from '../../assets/images/list-icon.svg'
 import cardIcon from '../../assets/images/card-icon.svg'
 
 function Home() {
-  const { news, fetchCompleted, favoriteNewsList } = useContext(NewsContext);
+  const { news, fetchCompleted, favoriteNewsList, styleNews, updateStyle } = useContext(NewsContext);
 
   const [newsToShow, setNewsToShow] = useState<'recents' | 'favorites'>('recents');
 
   const [newsQuantity, setNewsQuantity] = useState(10);
 
   if (!fetchCompleted) return (<h1>Carregando...</h1>);
-
-  const newsList = newsToShow === 'recents' ? news : favoriteNewsList;
 
   return (
     <div className={ styles.container }>
@@ -38,10 +36,10 @@ function Home() {
         </div>
 
         <div className={ styles.style__container }>
-          <button>
+          <button onClick={ () => updateStyle('list') }>
             <img src={ listIcon } alt="" />
           </button>
-          <button>
+          <button onClick={ () => updateStyle('card') }>
             <img src={ cardIcon } alt="" />
           </button>
         </div>
@@ -59,18 +57,6 @@ function Home() {
           }
         }) : <h2>Não há notícias favoritas</h2>
       }
-      {/* {newsToShow === 'recents'
-        ? news.map((notice, index) => {
-          if (index < newsQuantity && index !== 0) {
-            return <NewsCard key={notice.id} notice={notice} />;
-          }
-        })
-        : favoriteNewsList.map((notice, index) => {
-          if (index < newsQuantity) {
-            return <NewsCard key={notice.id} notice={notice} />;
-          }
-        })
-      } */}
       </div>
       {(newsQuantity < 100 && newsToShow === 'recents') && <button
         className={ styles.moreNews }

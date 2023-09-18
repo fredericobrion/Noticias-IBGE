@@ -9,6 +9,8 @@ type NewsProviderProps = {
 function NewsProvider({ children }: NewsProviderProps) {
   const [news, setNews] = useState<News[]>([]);
   const [fetchCompleted, setFetchCompleted] = useState(false);
+  const [styleNews, setStyleNews] = useState<'list' | 'card'>('card');
+
 
   const localStorageFavorites = JSON.parse(localStorage.getItem('favorites')) || [] as News[];
 
@@ -26,6 +28,10 @@ function NewsProvider({ children }: NewsProviderProps) {
     setFavoriteNewsList(favorite);
   }
 
+  const updateStyle = (style: 'list' | 'card') => {
+    setStyleNews(style);
+  }
+
   const valueContext = {
     news,
     updateNews,
@@ -33,6 +39,8 @@ function NewsProvider({ children }: NewsProviderProps) {
     updateCompleted,
     favoriteNewsList,
     updateFavoriteNews,
+    styleNews,
+    updateStyle,
   }
 
   return (

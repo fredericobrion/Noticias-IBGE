@@ -9,14 +9,16 @@
   width: 27%;
 }
 
-.container__card h4 {
+.container__card h4,
+.container__list h4 {
   font-family: 'IBM Plex Serif', serif;
   font-size: 1.125rem;
   font-weight: 600;
   height: 25%;
 }
 
-.container__card p {
+.container__card p,
+.container__list p {
   font-family: 'Nunito Sans', sans-serif;
   font-size: 1rem;
   font-weight: 400;
@@ -54,4 +56,31 @@ button {
   align-self: last baseline;
   border: none;
   cursor: pointer;
+}
+
+.teste {
+  display: flex;
+}
+
+.container__list {
+  border-radius: 5px;
+  box-shadow: 0 0 2px 2px rgb(0 0 0 / 0.2);
+  display: flex;
+  gap: 2rem;
+  margin: 1rem 5%;
+  padding: 0.5em;
+}
+
+.container__list__image {
+  max-width: 25%;
+}
+
+.container__extra {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.container__extra p{
+  width: 50%;
 }

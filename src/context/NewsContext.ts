@@ -8,6 +8,8 @@ type NewsContextType = {
   updateCompleted: (arg: boolean) => void;
   favoriteNewsList: News[];
   updateFavoriteNews: (arg: News[]) => void;
+  styleNews: string;
+  updateStyle: (arg: 'list' | 'card') => void;
 }
 
 const NewsContext = createContext({} as NewsContextType);

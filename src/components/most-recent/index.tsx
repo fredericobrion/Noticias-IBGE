@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import NewsContext from "../../context/NewsContext";
 import { Images, News } from "../../types";
 import daysPosted from "../../services/daysPosted";
@@ -13,8 +12,6 @@ const BASE_URL = 'https://agenciadenoticias.ibge.gov.br/';
 
 function MostRecent() {
   const { news, fetchCompleted, favoriteNewsList, updateFavoriteNews } = useContext(NewsContext);
-
-  const navigate = useNavigate();
 
   const mostRecentNew = fetchCompleted ? news[0] : {} as News;
 

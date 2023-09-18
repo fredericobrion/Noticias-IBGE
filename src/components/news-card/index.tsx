@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import NewsContext from '../../context/NewsContext';
 import { useContext } from 'react';
-import { News } from '../../types';
+import { Images, News } from '../../types';
 import daysPosted from '../../services/daysPosted';
 import styles from './news-card.module.css';
 
@@ -13,8 +13,13 @@ type NewsCardProsps = {
   notice: News;
 };
 
+const BASE_URL = 'https://agenciadenoticias.ibge.gov.br/';
+
+
 function NewsCard({ notice }: NewsCardProsps) {
-  const { favoriteNewsList, updateFavoriteNews } = useContext(NewsContext);
+  const { favoriteNewsList, updateFavoriteNews, styleNews } = useContext(NewsContext);
+
+  const images = JSON.parse(notice.imagens) as Images;
 
   const postedDate = notice.data_publicacao;
 
@@ -22,7 +27,7 @@ function NewsCard({ notice }: NewsCardProsps) {
 
   const isFavorite = localStorageFavorites.some((favorite) => favorite.id === notice.id);
 
-  return (
+  if (styleNews === 'card') return (
     <div className={ styles.container__card }>
       <h4>{notice.titulo}</h4>
       <p>{notice.introducao}</p>
@@ -43,6 +48,35 @@ function NewsCard({ notice }: NewsCardProsps) {
       </button>
     </div>
   );
+
+  return (
+    <div className={ styles.container__list }>
+      <img
+        src={ `${BASE_URL}${images.image_intro}` }
+        alt="Imagem principal da notícia"
+        className={ styles.container__list__image }
+      />
+      <div>
+        <h4>{notice.titulo}</h4>
+        <p>{notice.introducao}</p>
+        <div className={ styles.container__extra }>
+          <p>{daysPosted(postedDate)}</p>
+          <a
+            className={ styles.link }
+            href={ notice.link }
+            target='_blank'
+          >
+            Leia a Noticia
+          </a>
+          <button
+            onClick={ () => favoriteNews(notice.id, favoriteNewsList, updateFavoriteNews, notice) }
+          >
+            <img src={ isFavorite ? filledHeart : emptyHeart } alt="" />
+          </button>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default NewsCard;
