@@ -15,6 +15,8 @@ function MostRecent() {
 
   const mostRecentNew = fetchCompleted ? news[0] : {} as News;
 
+  console.log(news);
+
   const images = fetchCompleted ? JSON.parse(news[0].imagens) : {} as Images;
 
   const postedDate = fetchCompleted ? news[0].data_publicacao : '';
