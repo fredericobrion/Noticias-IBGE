@@ -1,37 +1,78 @@
 import MostRecent from '../../components/most-recent';
-import { useContext, useEffect, useState } from 'react';
-import { getNews } from '../../services/apiFetchs';
+import { useContext, useState } from 'react';
 import NewsContext from '../../context/NewsContext';
 import NewsCard from '../../components/news-card';
 import styles from './home.module.css';
 
+import listIcon from '../../assets/images/list-icon.svg'
+import cardIcon from '../../assets/images/card-icon.svg'
+
 function Home() {
-  const { news, updateNews, updateCompleted, fetchCompleted } = useContext(NewsContext);
+  const { news, fetchCompleted, favoriteNewsList } = useContext(NewsContext);
 
-  const [newsQuantity, setNewsQuantity] = useState(9);
+  const [newsToShow, setNewsToShow] = useState<'recents' | 'favorites'>('recents');
 
-  useEffect(() => {
-    const apiResult = async () => {
-      const response = await getNews();
-      updateNews(response.items);
-      updateCompleted(true);
-    };
-    apiResult();
-  }, []);
+  const [newsQuantity, setNewsQuantity] = useState(10);
 
   if (!fetchCompleted) return (<h1>Carregando...</h1>);
+
+  const newsList = newsToShow === 'recents' ? news : favoriteNewsList;
 
   return (
     <div className={ styles.container }>
       <MostRecent />
+      <div className={ styles.button__container }>
+        <div className={ styles.type__container }>
+          <button
+            className={ newsToShow === 'recents' ? styles.typeSelected : '' }
+            onClick={ () => setNewsToShow('recents') }
+          >
+            Mais recentes
+          </button>
+          <button
+            className={ newsToShow === 'favorites' ? styles.typeSelected : '' }
+            onClick={ () => setNewsToShow('favorites') }
+          >
+            Favoritas
+          </button>
+        </div>
+
+        <div className={ styles.style__container }>
+          <button>
+            <img src={ listIcon } alt="" />
+          </button>
+          <button>
+            <img src={ cardIcon } alt="" />
+          </button>
+        </div>
+      </div>
       <div className={ styles.container__news }>
-        {news.map((notice, index) => {
+        {newsToShow === 'recents'
+        ? news.map((notice, index) => {
+          if (index < newsQuantity && index !== 0) {
+            return <NewsCard key={notice.id} notice={notice} />;
+          }
+        })
+        : favoriteNewsList.length ? favoriteNewsList.map((notice, index) => {
           if (index < newsQuantity) {
             return <NewsCard key={notice.id} notice={notice} />;
           }
-        })}
+        }) : <h2>Não há notícias favoritas</h2>
+      }
+      {/* {newsToShow === 'recents'
+        ? news.map((notice, index) => {
+          if (index < newsQuantity && index !== 0) {
+            return <NewsCard key={notice.id} notice={notice} />;
+          }
+        })
+        : favoriteNewsList.map((notice, index) => {
+          if (index < newsQuantity) {
+            return <NewsCard key={notice.id} notice={notice} />;
+          }
+        })
+      } */}
       </div>
-      {newsQuantity < 100 && <button
+      {(newsQuantity < 100 && newsToShow === 'recents') && <button
         className={ styles.moreNews }
         onClick={() => setNewsQuantity(newsQuantity + 9)}
       >

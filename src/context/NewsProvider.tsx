@@ -9,7 +9,10 @@ type NewsProviderProps = {
 function NewsProvider({ children }: NewsProviderProps) {
   const [news, setNews] = useState<News[]>([]);
   const [fetchCompleted, setFetchCompleted] = useState(false);
-  const [favoriteNewsList, setFavoriteNewsList] = useState<News[]>([]);
+
+  const localStorageFavorites = JSON.parse(localStorage.getItem('favorites')) || [] as News[];
+
+  const [favoriteNewsList, setFavoriteNewsList] = useState<News[]>(localStorageFavorites);
 
   const updateNews = (news: News[]) => {
     setNews(news);

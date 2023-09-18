@@ -28,7 +28,13 @@ function NewsCard({ notice }: NewsCardProsps) {
       <p>{notice.introducao}</p>
       <div>
         <p>{daysPosted(postedDate)}</p>
-        <Link to="/" className={ styles.link }>Leia a Noticia</Link>
+        <a
+          className={ styles.link }
+          href={ notice.link }
+          target='_blank'
+        >
+          Leia a Noticia
+        </a>
       </div>
       <button
         onClick={ () => favoriteNews(notice.id, favoriteNewsList, updateFavoriteNews, notice) }
