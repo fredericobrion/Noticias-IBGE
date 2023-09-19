@@ -60,3 +60,42 @@
   background-color: black;
   color: rgba(5, 212, 101, 1);
 }
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 992px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .container a img{
+    position: relative;
+    top: 3rem;
+    max-width: 21rem;
+  }
+
+  .container div {
+    width: 100%;
+  }
+
+  .container h6 {
+    bottom: 12.3rem;
+    position: relative;
+    width: 100%;
+  }
+
+  .container h2 {}
+
+  .favoriteButton {
+    position: relative;
+    left: 90%;
+    bottom: 14.5rem;
+  }
+}

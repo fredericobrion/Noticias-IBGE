@@ -7,10 +7,8 @@ import NewsProvider from './context/NewsProvider.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <NewsProvider>
-        <App />
-      </NewsProvider>
-    </BrowserRouter>
+    <NewsProvider>
+      <App />
+    </NewsProvider>
   </React.StrictMode>,
 )

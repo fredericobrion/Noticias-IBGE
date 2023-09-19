@@ -69,10 +69,15 @@ button {
   gap: 2rem;
   margin: 1rem 5%;
   padding: 0.5em;
+  width: 100%;
 }
 
 .container__list__image {
-  max-width: 25%;
+  width: 25%;
+}
+
+.container__list__image img {
+  width: 100%;
 }
 
 .container__extra {
@@ -83,4 +88,50 @@ button {
 
 .container__extra p{
   width: 50%;
+}
+
+@media only screen and (max-width: 992px) {
+  .container__list {
+    flex-direction: column;
+    gap: 0.5rem;
+    height: auto;
+  }
+
+  .container__list__image {
+    width: 100%;
+  }
+
+  .container__list h4 {
+    height: auto;
+    margin: 0.2rem 0 1rem;
+  }
+
+  .container__list p {
+    height: auto;
+    margin-bottom: 1rem;
+  }
+
+  .container__extra {
+    padding: 0.5rem;
+  }
+}
+
+@media only screen and (min-width: 1680px) {
+  .container__card h4,
+  .container__list h4 {
+    font-size: 1.5rem;
+  }
+
+  .container__card p,
+  .container__list p {
+    font-size: 1.2rem;
+  }
+
+  .link {
+    font-size: 1.1rem;
+  }
+
+  .container__extra span{
+    font-size: 1.1rem;
+  }
 }

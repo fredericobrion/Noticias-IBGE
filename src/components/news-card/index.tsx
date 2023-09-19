@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import NewsContext from '../../context/NewsContext';
 import { useContext } from 'react';
 import { Images, News } from '../../types';
@@ -23,14 +22,16 @@ function NewsCard({ notice }: NewsCardProsps) {
 
   const postedDate = notice.data_publicacao;
 
-  const localStorageFavorites = JSON.parse(localStorage.getItem('favorites')) as News[] || [] as News[];
-
-  const isFavorite = localStorageFavorites.some((favorite) => favorite.id === notice.id);
+  const isFavorite = favoriteNewsList.some((favorite) => favorite.id === notice.id);
 
   if (styleNews === 'card') return (
     <div className={ styles.container__card }>
-      <h4>{notice.titulo}</h4>
-      <p>{notice.introducao}</p>
+      <a href={ notice.link } target='_blank'>
+        <h4>{notice.titulo}</h4>
+      </a>
+      <a href={ notice.link } target='_blank'>
+        <p>{notice.introducao}</p>
+      </a>
       <div>
         <p>{daysPosted(postedDate)}</p>
         <a
@@ -51,16 +52,21 @@ function NewsCard({ notice }: NewsCardProsps) {
 
   return (
     <div className={ styles.container__list }>
-      <img
-        src={ `${BASE_URL}${images.image_intro}` }
-        alt="Imagem principal da notícia"
-        className={ styles.container__list__image }
-      />
+      <a href={ notice.link } target='_blank' className={ styles.container__list__image }>
+        <img
+          src={ `${BASE_URL}${images.image_intro}` }
+          alt="Imagem principal da notícia"
+        />
+      </a>
       <div>
-        <h4>{notice.titulo}</h4>
-        <p>{notice.introducao}</p>
+        <a href={ notice.link } target='_blank'>
+          <h4>{notice.titulo}</h4>
+        </a>
+        <a href={ notice.link } target='_blank'>
+          <p>{notice.introducao}</p>
+        </a>
         <div className={ styles.container__extra }>
-          <p>{daysPosted(postedDate)}</p>
+          <span>{daysPosted(postedDate)}</span>
           <a
             className={ styles.link }
             href={ notice.link }
