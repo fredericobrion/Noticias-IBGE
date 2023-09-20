@@ -46,7 +46,10 @@ function MostRecent() {
             )
           }
         >
-          <img src={isFavorite ? filledHeart : emptyHeart} alt="" />
+          <img
+            src={isFavorite ? filledHeart : emptyHeart}
+            alt={ isFavorite ? 'Filled heart' : 'Empty heart' }
+          />
         </button>
         <a href={mostRecentNew.link} target="_blank">
           <h2>{mostRecentNew.titulo}</h2>

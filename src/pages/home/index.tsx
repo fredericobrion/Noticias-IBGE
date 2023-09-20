@@ -7,6 +7,7 @@ import styles from './home.module.css';
 import listIcon from '../../assets/images/list-icon.svg'
 import cardIcon from '../../assets/images/card-icon.svg'
 import { News } from '../../types';
+import Loading from '../../components/loading';
 
 function Home() {
   const { news, fetchCompleted, favoriteNewsList, styleNews, updateStyle } = useContext(NewsContext);
@@ -15,7 +16,7 @@ function Home() {
   const [newsQuantity, setNewsQuantity] = useState(10);
   const [filter, setFilter] = useState('');
 
-  if (!fetchCompleted) return (<h1>Carregando...</h1>);
+  if (!fetchCompleted) return (<Loading />);
 
   const newsList = () => {
     if (newsToShow === 'recents') return news.filter((_, index) => index !== 0);
@@ -47,6 +48,7 @@ function Home() {
           <button
             className={ newsToShow === 'news' ? styles.typeSelected : '' }
             onClick={ () => setNewsToShow('news') }
+            data-testid="news-button"
           >
             Notícia
           </button>
@@ -66,10 +68,10 @@ function Home() {
 
         <div className={ styles.style__container }>
           <button onClick={ () => updateStyle('list') }>
-            <img src={ listIcon } alt="" />
+            <img src={ listIcon } alt="Display news in list" />
           </button>
           <button onClick={ () => updateStyle('card') }>
-            <img src={ cardIcon } alt="" />
+            <img src={ cardIcon } alt="Display new in cards" />
           </button>
         </div>
       </div>
