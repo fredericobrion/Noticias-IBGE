@@ -37,6 +37,7 @@ function MostRecent() {
         <h6>Notícia mais recente</h6>
         <button
           className={ styles.favoriteButton }
+          data-testid="favorite-button"
           onClick={() =>
             favoriteNews(
               mostRecentNew.id,

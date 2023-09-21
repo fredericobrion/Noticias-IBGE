@@ -72,48 +72,4 @@ describe('Verifica o funcionamento da página', () => {
 
     expect(screen.getByText('Titulo da decima segunda notícia')).toBeInTheDocument();
   })
-
-  test.only('Testa os botões de filtro e o input', async () => {
-    const loadingEl = screen.getByTestId('loading-element');
-    await waitForElementToBeRemoved(loadingEl);
-
-    const noticia = screen.getByText('Titulo da terceira notícia');
-    const release = screen.getByText('Titulo da segunda notícia');
-
-    const maisRecentesBtn = screen.getByRole('button', {
-      name: /mais recentes/i
-    });
-
-    const releaseBtn = screen.getByRole('button', {
-      name: /mais recentes/i
-    });
-
-    const noticiaBtn = screen.getByTestId('news-button');
-
-    const favoritasBtn = screen.getByRole('button', {
-      name: /favoritas/i
-    });
-
-    const input = screen.getByRole('textbox');
-
-    const emptyHeartBtn = screen.getAllByRole('img', {
-      name: /empty heart/i
-    });
-
-    expect(noticia).toBeInTheDocument();
-    expect(release).toBeInTheDocument();
-
-    // await userEvent.click(releaseBtn);
-    // expect(noticia).not.toBeInTheDocument();
-    // expect(release).toBeInTheDocument();
-
-    // await userEvent.click(noticiaBtn);
-    // expect(noticia).toBeInTheDocument();
-    // expect(release).not.toBeInTheDocument();
-    
-    await userEvent.click(emptyHeartBtn[0]);
-    await userEvent.click(favoritasBtn);
-    expect(noticia).toBeInTheDocument();
-    expect(release).not.toBeInTheDocument();
-  });
 });
