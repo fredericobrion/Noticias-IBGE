@@ -11,8 +11,12 @@ function NewsProvider({ children }: NewsProviderProps) {
   const [fetchCompleted, setFetchCompleted] = useState(false);
   const [styleNews, setStyleNews] = useState<'list' | 'card'>('list');
 
+  let localStorageFavorites = [] as News[];
 
-  const localStorageFavorites = JSON.parse(localStorage.getItem('favorites')) || [] as News[];
+  if(localStorage.getItem('favorites')) {
+    localStorageFavorites = JSON.parse(localStorage.getItem('favorites')!) as News[] || [] as News[];
+  }
+  // const localStorageFavorites = JSON.parse(localStorage.getItem('favorites')) || [] as News[];
 
   const [favoriteNewsList, setFavoriteNewsList] = useState<News[]>(localStorageFavorites);
 

@@ -10,7 +10,7 @@ import { News } from '../../types';
 import Loading from '../../components/loading';
 
 function Home() {
-  const { news, fetchCompleted, favoriteNewsList, styleNews, updateStyle } = useContext(NewsContext);
+  const { news, fetchCompleted, favoriteNewsList,  updateStyle } = useContext(NewsContext);
 
   const [newsToShow, setNewsToShow] = useState<'recents' | 'favorites' | 'release' | 'news'>('recents');
   const [newsQuantity, setNewsQuantity] = useState(10);
