@@ -1,7 +1,7 @@
 # Noticias IBGE
 
 ## Descrição
-O site permite aos usuários explorar notícias fornecidas pelo IBGE. Ele oferece funcionalidades como leitura de notícias, filtragem por tipo e título, bem como a capacidade de favoritar notícias de interesse.
+O site permite aos usuários explorarem notícias fornecidas pelo IBGE. Ele oferece funcionalidades como leitura de notícias, filtragem por tipo e título, bem como a capacidade de favoritar notícias de interesse.
 [Conheça o projeto](https://fredericobrion.github.io/noticias-ibge/)
 
 ## Tecnologias Utilizadas
